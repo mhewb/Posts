@@ -1,0 +1,75 @@
+package io.formation.posts.model;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+public class Post {
+
+    public static final DateTimeFormatter CUSTOM_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private int id;
+    private String title;
+    private String author;
+    private String content;
+    private LocalDateTime createdAt;
+    private String imgUrl;
+
+    public Post(String title, String author, String content, LocalDateTime createdAt) {
+        this.title = title;
+        this.author = author;
+        this.content = content;
+        this.createdAt = createdAt;
+    }
+
+    public Post(int id, String title, String author, String content, LocalDateTime createdAt, String imgUrl) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.imgUrl = imgUrl;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+}
