@@ -4,7 +4,6 @@ import io.formation.posts.model.Post;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,6 @@ public class PostJdbcDAO implements PostDAO {
 
         return new Post(id, title, author, content, createdAt, imgUrl);
     }
-
     @Override
     public void create(Post post) {
 
@@ -68,10 +66,54 @@ public class PostJdbcDAO implements PostDAO {
         }
         return postList;
     }
-
     @Override
-    public List<Post> findByAuthor(String author) {
-        return null;
+    public Post getById(Integer id) {
+
+        Connection connection = ConnectionManager.getInstance();
+        String query = "SELECT id, title, author, content, createdAt, imgURL FROM Posts WHERE id=?;";
+        Post postFound = null;
+
+        try {
+            PreparedStatement myPreparedStatement = connection.prepareStatement(query);
+            myPreparedStatement.setInt(1, id);
+            ResultSet result = myPreparedStatement.executeQuery();
+            if (result.next()) {
+                postFound = mapToPost(result);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return postFound;
+
+    }
+
+    public void update(Post post) {
+
+        Connection connection = ConnectionManager.getInstance();
+        String query = new StringBuilder()
+                .append("UPDATE Posts ")
+                .append("SET title = ?, ")
+                .append("content = ?, ")
+                .append("imgUrl = ?")
+                .append(" WHERE id=?").toString();
+
+        try {
+            PreparedStatement myPreparedStatement = connection.prepareStatement(query);
+
+            myPreparedStatement.setString(1, post.getTitle());
+            myPreparedStatement.setString(2, post.getContent());
+//            myPreparedStatement.setString(4, post.getCreatedAt().format(Post.CUSTOM_FORMATTER));
+            myPreparedStatement.setString(3, post.getImgUrl());
+            myPreparedStatement.setInt(4, post.getId());
+
+            int row = myPreparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
 }

@@ -1,7 +1,5 @@
 package io.formation.posts.servlet;
 
-import io.formation.posts.dao.UserJdbcDAO;
-import io.formation.posts.model.User;
 import io.formation.posts.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

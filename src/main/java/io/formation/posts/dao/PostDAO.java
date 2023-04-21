@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface PostDAO extends GenericDAO<Post, Integer>{
 
-    List<Post> findByAuthor(String author);
+//    List<Post> findByPost(String author);
 
 }

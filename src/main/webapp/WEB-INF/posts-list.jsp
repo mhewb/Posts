@@ -62,7 +62,19 @@
                                 <fmt:formatDate pattern="HH:mm" value="${postTime}"/>
                             </h6>
 
-                            <p class="card-text"> ${p.content} </p>
+                            <p class="card-text text-truncate"> ${p.content} </p>
+
+                            <a class="btn btn-primary ${username != p.author ? 'disabled' : ''}"
+                               role="button"
+                                ${username != p.author ? '' : 'href="/edit-post?id=' += p.id += '"'}
+                                ${username != p.author ? 'aria-disabled="true"' : ''}>Edit</a>
+
+                            <a class="btn btn-danger ${username != p.author ? 'disabled' : ''}"
+                               role="button"
+                                ${username != p.author ? '' : 'href="/edit-post?id='.concat(p.id).concat('"')}
+                                ${username != p.author ? 'aria-disabled="true"' : ''}>Delete</a>
+
+
 
                         </div>
                     </div>

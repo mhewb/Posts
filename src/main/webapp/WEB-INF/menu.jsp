@@ -16,9 +16,11 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/create-post">Create Post</a>
                 </li>
             </ul>
+
             <span class="navbar-text">
                 ${empty username ? 'Not connected': username}
             </span>
+
         </div>
     </div>
 </nav>

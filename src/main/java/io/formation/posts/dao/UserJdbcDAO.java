@@ -61,6 +61,16 @@ public class UserJdbcDAO implements UserDAO {
         return userList;
     }
 
+    @Override
+    public User getById(Integer integer) {
+        return null;
+    }
+
+    @Override
+    public void update(User entity) {
+
+    }
+
 
     @Override
     public User findByUsername(String username) {
