@@ -47,15 +47,14 @@ public class PostsResource {
                 .build();
     }
 
-//    public Response createPost(Post post) {  // JSON ===> JAVA
-//
-//        System.out.println(post);
-//        postService.createPost(post);
-//
-//        return Response
-//                .status(Response.Status.CREATED)
-//                .entity(post)
-//                .build();  // JAVA ===> JSON
-//    }
+    public Response createPost(Post post) {  // JSON ===> JAVA
+        
+        postService.createPost(post);
+
+        return Response
+                .status(Response.Status.CREATED)
+                .entity(post)
+                .build();  // JAVA ===> JSON
+    }
 }
 
