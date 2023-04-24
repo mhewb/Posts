@@ -58,5 +58,26 @@ public class PostsResource {
                 .status(Response.Status.OK)
                 .build();  // JAVA ===> JSON
     }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(@PathParam("id") int id, Post post) {
+        Post existingPost = postService.getPostById(id);
+
+        if (existingPost == null) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .build();
+        }
+
+        post.setId(existingPost.getId());
+        postService.updatePost(post);
+        return Response
+                .status(Response.Status.OK)
+                .build();
+
+//        return Response.ok(post).build();
+    }
 }
 

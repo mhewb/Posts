@@ -29,6 +29,10 @@ public class PostService {
         postDAO.create(post);
     }
 
+    public void updatePost(Post post) {
+        postDAO.update(post);
+    }
+
     public void deletePostById(int id) { // TODO: necessary?
         Post post = postDAO.getById(id);
         postDAO.delete(post);
