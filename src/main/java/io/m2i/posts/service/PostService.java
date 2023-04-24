@@ -20,15 +20,17 @@ public class PostService {
     }
 
     public void createPost(String title, String author, String content, String imgUrl) {
-
         Post p = new Post(title, author, content);
         p.setImgUrl(imgUrl);
         postDAO.create(p);
-
-
     }
 
     public void createPost(Post post) {
         postDAO.create(post);
+    }
+
+    public void deletePostById(int id) { // TODO: necessary?
+        Post post = postDAO.getById(id);
+        postDAO.delete(post);
     }
 }

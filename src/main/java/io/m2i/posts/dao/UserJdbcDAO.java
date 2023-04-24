@@ -68,7 +68,12 @@ public class UserJdbcDAO implements UserDAO {
 
     @Override
     public void update(User entity) {
+        // TODO: User update
+    }
 
+    @Override
+    public void delete(User entity) {
+        // TODO: User delete
     }
 
 

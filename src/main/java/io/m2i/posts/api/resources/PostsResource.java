@@ -1,4 +1,4 @@
-package io.m2i.posts.resources;
+package io.m2i.posts.api.resources;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -44,6 +44,18 @@ public class PostsResource {
         return Response
                 .status(Response.Status.CREATED)
                 .entity(post)
+                .build();  // JAVA ===> JSON
+    }
+
+    @Path("{id}")
+    @DELETE
+    @Consumes(value = MediaType.APPLICATION_JSON)
+    public Response deletePostById(@PathParam("id") int id) {  // JSON ===> JAVA
+
+        postService.deletePostById(id);
+
+        return Response
+                .status(Response.Status.OK)
                 .build();  // JAVA ===> JSON
     }
 }
