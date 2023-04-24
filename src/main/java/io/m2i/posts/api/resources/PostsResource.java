@@ -37,24 +37,14 @@ public class PostsResource {
     @POST
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
-    public Response createPost(String json) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Post post = objectMapper.readValue(json, Post.class);
-
-        return Response
-                .status(Response.Status.CREATED)
-                .entity(post)
-                .build();
-    }
-
     public Response createPost(Post post) {  // JSON ===> JAVA
-        
+
         postService.createPost(post);
 
         return Response
                 .status(Response.Status.CREATED)
                 .entity(post)
                 .build();  // JAVA ===> JSON
-    }
+    }44
 }
 
