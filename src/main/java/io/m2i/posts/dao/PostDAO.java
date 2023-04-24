@@ -1,9 +1,7 @@
-package io.formation.posts.dao;
+package io.m2i.posts.dao;
 
 
-import io.formation.posts.model.Post;
-
-import java.util.List;
+import io.m2i.posts.model.Post;
 
 public interface PostDAO extends GenericDAO<Post, Integer>{
 

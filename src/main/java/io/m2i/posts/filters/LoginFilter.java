@@ -1,4 +1,4 @@
-package io.formation.posts.filters;
+package io.m2i.posts.filters;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -18,21 +18,22 @@ public class LoginFilter extends HttpFilter {
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) resp;
-        HttpSession session = request.getSession();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) req;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) resp;
+        HttpSession session = httpServletRequest.getSession();
 
         // Public route accessible w/o connexion
         if (
-                request.getRequestURI().equals(request.getContextPath() + "/")
-                        || request.getRequestURI().equals(request.getContextPath() + "/login")
-                        || request.getRequestURI().equals(request.getContextPath() + "/register")
+                httpServletRequest.getRequestURI().equals(httpServletRequest.getContextPath() + "/")
+                        || httpServletRequest.getRequestURI().equals(httpServletRequest.getContextPath() + "/login")
+                        || httpServletRequest.getRequestURI().equals(httpServletRequest.getContextPath() + "/register")
+                        || httpServletRequest.getRequestURI().contains(httpServletRequest.getContextPath() + "/webapi")
         ) {
             chain.doFilter(req, resp); // Les pages restent accessibles
         } else {
             if (session.getAttribute("username") == null) {
                 // If no username: go to login page
-                response.sendRedirect(request.getContextPath() + "/login");
+                httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login");
             } else {
                 // Continue la chaine des filtres/navigations
                 chain.doFilter(req, resp);

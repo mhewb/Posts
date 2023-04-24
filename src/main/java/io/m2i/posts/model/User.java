@@ -1,4 +1,4 @@
-package io.formation.posts.model;
+package io.m2i.posts.model;
 
 public class User {
 

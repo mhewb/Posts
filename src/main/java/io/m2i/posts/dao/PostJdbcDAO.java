@@ -1,6 +1,6 @@
-package io.formation.posts.dao;
+package io.m2i.posts.dao;
 
-import io.formation.posts.model.Post;
+import io.m2i.posts.model.Post;
 
 import java.sql.*;
 import java.time.LocalDateTime;

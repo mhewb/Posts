@@ -1,4 +1,4 @@
-package io.formation.posts.servlet;
+package io.m2i.posts.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

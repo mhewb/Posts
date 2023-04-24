@@ -1,4 +1,4 @@
-package io.formation.posts.model;
+package io.m2i.posts.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +12,9 @@ public class Post {
     private String content;
     private LocalDateTime createdAt;
     private String imgUrl;
+
+    public Post() {
+    }
 
     public Post(String title, String author, String content, LocalDateTime createdAt) {
         this.title = title;
@@ -27,6 +30,18 @@ public class Post {
         this.content = content;
         this.createdAt = createdAt;
         this.imgUrl = imgUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "\n id=" + id +
+                "\n title='" + title + '\'' +
+                "\n author='" + author + '\'' +
+                "\n content='" + content + '\'' +
+                "\n createdAt=" + createdAt +
+                "\n imgUrl='" + imgUrl + '\'' +
+                '}';
     }
 
     public int getId() {

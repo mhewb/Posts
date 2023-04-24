@@ -1,6 +1,6 @@
-package io.formation.posts.dao;
+package io.m2i.posts.dao;
 
-import io.formation.posts.model.User;
+import io.m2i.posts.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;

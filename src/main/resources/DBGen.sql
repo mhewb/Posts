@@ -17,11 +17,11 @@ CREATE TABLE Posts (
                        title VARCHAR(100),
                        author VARCHAR(50),
                        content TEXT,
-                       createdAt VARCHAR(50),
-                       imgURL VARCHAR(255),
+                       createdAt VARCHAR(255),
+                       imgURL TEXT,
                        PRIMARY KEY (id)
 );
 
 INSERT INTO Users(username, email, password, isAdmin) VALUES ('admin', 'admin@admin.io', 'admin', true);
 
-SELECT id, username, email, password FROM users WHERE username='admin';
+# SELECT id, username, email, password FROM users WHERE username='admin';

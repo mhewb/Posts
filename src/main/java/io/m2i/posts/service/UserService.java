@@ -1,8 +1,8 @@
-package io.formation.posts.service;
+package io.m2i.posts.service;
 
-import io.formation.posts.dao.UserDAO;
-import io.formation.posts.dao.UserJdbcDAO;
-import io.formation.posts.model.User;
+import io.m2i.posts.dao.UserDAO;
+import io.m2i.posts.dao.UserJdbcDAO;
+import io.m2i.posts.model.User;
 
 public class UserService {
     private final UserDAO userDAO = new UserJdbcDAO();

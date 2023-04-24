@@ -1,11 +1,8 @@
-package io.formation.posts.servlet;
+package io.m2i.posts.servlet;
 
-import io.formation.posts.dao.PostDAO;
-import io.formation.posts.dao.PostJdbcDAO;
-import io.formation.posts.dao.UserDAO;
-import io.formation.posts.dao.UserJdbcDAO;
-import io.formation.posts.model.Post;
-import io.formation.posts.service.PostService;
+import io.m2i.posts.dao.PostDAO;
+import io.m2i.posts.dao.PostJdbcDAO;
+import io.m2i.posts.model.Post;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

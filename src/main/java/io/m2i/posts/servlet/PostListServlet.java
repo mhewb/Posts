@@ -1,7 +1,7 @@
-package io.formation.posts.servlet;
+package io.m2i.posts.servlet;
 
-import io.formation.posts.model.Post;
-import io.formation.posts.service.PostService;
+import io.m2i.posts.model.Post;
+import io.m2i.posts.service.PostService;
 import jakarta.servlet.ServletException;
 
 import jakarta.servlet.annotation.WebServlet;

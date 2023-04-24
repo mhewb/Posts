@@ -1,4 +1,4 @@
-package io.formation.posts.dao;
+package io.m2i.posts.dao;
 import java.util.List;
 
 public interface GenericDAO<T, ID> {
