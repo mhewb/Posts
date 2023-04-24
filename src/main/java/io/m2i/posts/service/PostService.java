@@ -24,7 +24,7 @@ public class PostService {
         Post p = new Post(title, author, content);
         p.setImgUrl(imgUrl);
         postDAO.create(p);
-//        return p;
+
 
     }
 

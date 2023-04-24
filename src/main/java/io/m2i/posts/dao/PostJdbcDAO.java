@@ -108,7 +108,23 @@ public class PostJdbcDAO implements PostDAO {
             throw new RuntimeException(e);
         }
 
+    }
 
+    @Override
+    public void delete(Post post) {
+        Connection connection = ConnectionManager.getInstance();
+        String sqlQuery = "DELETE FROM Posts WHERE id=?";
+
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(sqlQuery);
+            prepStatement.setInt(1, post.getId());
+
+            int row = prepStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Unable to delete Post");
+        }
     }
 
 }
