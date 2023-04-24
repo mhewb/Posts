@@ -45,6 +45,6 @@ public class PostsResource {
                 .status(Response.Status.CREATED)
                 .entity(post)
                 .build();  // JAVA ===> JSON
-    }44
+    }
 }
 
