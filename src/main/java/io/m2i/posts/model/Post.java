@@ -10,25 +10,25 @@ public class Post {
     private String title;
     private String author;
     private String content;
-    private LocalDateTime createdAt;
+//    private LocalDateTime createdAt;
     private String imgUrl;
 
     public Post() {
     }
 
-    public Post(String title, String author, String content, LocalDateTime createdAt) {
+    public Post(String title, String author, String content) {
         this.title = title;
         this.author = author;
         this.content = content;
-        this.createdAt = createdAt;
+//        this.createdAt = createdAt;
     }
 
-    public Post(int id, String title, String author, String content, LocalDateTime createdAt, String imgUrl) {
+    public Post(int id, String title, String author, String content, String imgUrl) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.content = content;
-        this.createdAt = createdAt;
+//        this.createdAt = createdAt;
         this.imgUrl = imgUrl;
     }
 
@@ -39,7 +39,6 @@ public class Post {
                 "\n title='" + title + '\'' +
                 "\n author='" + author + '\'' +
                 "\n content='" + content + '\'' +
-                "\n createdAt=" + createdAt +
                 "\n imgUrl='" + imgUrl + '\'' +
                 '}';
     }
@@ -74,10 +73,6 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
     }
 
     public String getImgUrl() {

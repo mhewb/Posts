@@ -20,7 +20,22 @@
 
 <div class="container-md p-3">
 
-  <c:if test="${empty alreadyLogged}">
+  <c:if test="${!empty username}">
+
+    <div class="row">
+
+      <div class="col-6 p-5">
+
+        <form action="${pageContext.request.contextPath}/logout" method="post">
+          <button class="btn btn-danger" type="submit">Logout</button>
+        </form>
+
+      </div>
+    </div>
+
+  </c:if>
+
+  <c:if test="${empty isLogged}">
 
   <div class="row">
 
@@ -30,11 +45,11 @@
 
         <div class="col-md-6">
           <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" id="username" name="username">
+          <input type="text" class="form-control" id="username" name="username" value="admin">
         </div>
         <div class="col-md-6">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
+          <input type="password" class="form-control" id="password" name="password" value="admin">
         </div>
 
         <button class="btn btn-primary" type="submit">Login</button>
@@ -81,13 +96,7 @@
     <script>alert('Welcome ${username} ! Do not forget your password: `${password}`')</script>
   </c:if>
 
-  <c:if test="${alreadyLogged == true}">
 
-    <form action="${pageContext.request.contextPath}/logout" method="post">
-      <button class="btn btn-danger" type="submit">Logout</button>
-    </form>
-
-  </c:if>
 
 
 

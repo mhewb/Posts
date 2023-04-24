@@ -14,28 +14,24 @@ public class PostJdbcDAO implements PostDAO {
         String title = resultSet.getString("title");
         String author = resultSet.getString("author");
         String content = resultSet.getString("content");
-        String createdAtStr = resultSet.getString("createdAt");
         String imgUrl = resultSet.getString("imgUrl");
 
-        LocalDateTime createdAt = LocalDateTime.parse(createdAtStr, Post.CUSTOM_FORMATTER);
-
-        return new Post(id, title, author, content, createdAt, imgUrl);
+        return new Post(id, title, author, content, imgUrl);
     }
     @Override
     public void create(Post post) {
 
         Connection connection = ConnectionManager.getInstance();
         String query =
-                "INSERT INTO Posts(title, author, content, createdAt, imgUrl) " +
-                " VALUES(?,?,?,?,?)";
+                "INSERT INTO Posts(title, author, content, imgUrl) " +
+                " VALUES(?,?,?,?)";
 
         try {
             PreparedStatement myPreparedStatement = connection.prepareStatement(query);
             myPreparedStatement.setString(1, post.getTitle());
             myPreparedStatement.setString(2, post.getAuthor());
             myPreparedStatement.setString(3, post.getContent());
-            myPreparedStatement.setString(4, post.getCreatedAt().format(Post.CUSTOM_FORMATTER));
-            myPreparedStatement.setString(5, post.getImgUrl());
+            myPreparedStatement.setString(4, post.getImgUrl());
 
             int row = myPreparedStatement.executeUpdate();
 
@@ -48,7 +44,7 @@ public class PostJdbcDAO implements PostDAO {
     public List<Post> findAll() {
         List<Post> postList = new ArrayList<>();
         Connection connection = ConnectionManager.getInstance();
-        String query = "SELECT id, title, author, content, createdAt, imgUrl FROM Posts";
+        String query = "SELECT id, title, author, content, imgUrl FROM Posts";
 
         try {
             Statement myStatement = connection.createStatement();
@@ -70,7 +66,7 @@ public class PostJdbcDAO implements PostDAO {
     public Post getById(Integer id) {
 
         Connection connection = ConnectionManager.getInstance();
-        String query = "SELECT id, title, author, content, createdAt, imgURL FROM Posts WHERE id=?;";
+        String query = "SELECT id, title, author, content, imgURL FROM Posts WHERE id=?;";
         Post postFound = null;
 
         try {
@@ -103,7 +99,6 @@ public class PostJdbcDAO implements PostDAO {
 
             myPreparedStatement.setString(1, post.getTitle());
             myPreparedStatement.setString(2, post.getContent());
-//            myPreparedStatement.setString(4, post.getCreatedAt().format(Post.CUSTOM_FORMATTER));
             myPreparedStatement.setString(3, post.getImgUrl());
             myPreparedStatement.setInt(4, post.getId());
 
@@ -113,7 +108,23 @@ public class PostJdbcDAO implements PostDAO {
             throw new RuntimeException(e);
         }
 
+    }
 
+    @Override
+    public void delete(Post post) {
+        Connection connection = ConnectionManager.getInstance();
+        String sqlQuery = "DELETE FROM Posts WHERE id=?";
+
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(sqlQuery);
+            prepStatement.setInt(1, post.getId());
+
+            int row = prepStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Unable to delete Post");
+        }
     }
 
 }

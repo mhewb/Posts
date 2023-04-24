@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if (session.getAttribute("username") != null) {
-            req.setAttribute("alreadyLogged", "You are already logged !");
+            req.setAttribute("isLogged", "You are already logged !");
         } else {
             req.setAttribute("username", session.getAttribute("username"));
         }
@@ -40,10 +40,9 @@ public class LoginServlet extends HttpServlet {
 
         UserService userService = new UserService();
         boolean isLogged = userService.checkLog(username, password);
-        System.out.println(isLogged);
 
         if (isLogged == false) {
-            req.setAttribute("loggingError", "Bad credentials.");
+            req.setAttribute("loggingError", true);
             req.getRequestDispatcher(LoginServlet.JSP).forward(req, resp);
         } else {
             HttpSession session = req.getSession();

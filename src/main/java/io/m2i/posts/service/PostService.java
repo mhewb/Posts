@@ -21,11 +21,10 @@ public class PostService {
 
     public void createPost(String title, String author, String content, String imgUrl) {
 
-        LocalDateTime createdAt = LocalDateTime.now();
-        Post p = new Post(title, author, content, createdAt);
+        Post p = new Post(title, author, content);
         p.setImgUrl(imgUrl);
         postDAO.create(p);
-//        return p;
+
 
     }
 
