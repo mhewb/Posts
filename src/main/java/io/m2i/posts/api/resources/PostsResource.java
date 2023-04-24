@@ -1,4 +1,4 @@
-package io.m2i.posts.resources;
+package io.m2i.posts.api.resources;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -37,25 +37,15 @@ public class PostsResource {
     @POST
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
-    public Response createPost(String json) throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Post post = objectMapper.readValue(json, Post.class);
+    public Response createPost(Post post) {  // JSON ===> JAVA
+
+        System.out.println(post);
+        postService.createPost(post);
 
         return Response
                 .status(Response.Status.CREATED)
                 .entity(post)
-                .build();
+                .build();  // JAVA ===> JSON
     }
-
-//    public Response createPost(Post post) {  // JSON ===> JAVA
-//
-//        System.out.println(post);
-//        postService.createPost(post);
-//
-//        return Response
-//                .status(Response.Status.CREATED)
-//                .entity(post)
-//                .build();  // JAVA ===> JSON
-//    }
 }
 
