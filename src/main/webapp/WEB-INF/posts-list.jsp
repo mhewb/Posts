@@ -56,12 +56,6 @@
                                 from: ${p.author}
                             </h6>
 
-                            <h6 class="card-subtitle mb-2 text-muted fw-lighter">
-                                <fmt:parseDate value="${p.createdAt}" pattern="yyyy-MM-dd'T'HH:mm" var="postTime" type="both"/>
-                                <fmt:formatDate pattern="yyyy-MM-dd" value="${postTime}"/> @
-                                <fmt:formatDate pattern="HH:mm" value="${postTime}"/>
-                            </h6>
-
                             <p class="card-text text-truncate"> ${p.content} </p>
 
                             <a class="btn btn-primary ${username != p.author ? 'disabled' : ''}"
