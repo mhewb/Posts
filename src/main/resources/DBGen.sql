@@ -23,5 +23,5 @@ CREATE TABLE Posts (
 );
 
 INSERT INTO Users(username, email, password, isAdmin) VALUES ('admin', 'admin@admin.io', 'admin', true);
-INSERT INTO Posts(title, author, content, imgURL) VALUES ('Test title', 'admin', 'this is a test content', 'noUrl')
+INSERT INTO Posts(title, author, content, imgURL) VALUES ('Test title', 'admin', 'this is a test content', '/images/img1.jpg')
 # SELECT id, username, email, password FROM users WHERE username='admin';

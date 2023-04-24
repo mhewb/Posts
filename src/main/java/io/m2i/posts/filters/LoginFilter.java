@@ -25,9 +25,10 @@ public class LoginFilter extends HttpFilter {
         // Public route accessible w/o connexion
         if (
                 httpServletRequest.getRequestURI().equals(httpServletRequest.getContextPath() + "/")
-                        || httpServletRequest.getRequestURI().equals(httpServletRequest.getContextPath() + "/login")
+                        ||httpServletRequest.getRequestURI().equals(httpServletRequest.getContextPath() + "/login")
                         || httpServletRequest.getRequestURI().equals(httpServletRequest.getContextPath() + "/register")
                         || httpServletRequest.getRequestURI().contains(httpServletRequest.getContextPath() + "/webapi")
+                        || httpServletRequest.getRequestURI().contains(httpServletRequest.getContextPath() + "/images")
         ) {
             chain.doFilter(req, resp); // Les pages restent accessibles
         } else {

@@ -44,9 +44,8 @@
                         </c:if>
 
                         <c:if test="${!empty p.imgUrl}">
-                            <img src="${p.imgUrl}" class="card-img-top" alt="...">
+                            <img src="${pageContext.request.contextPath}/${p.imgUrl}" class="card-img-top" alt="...">
                         </c:if>
-
 
                         <div class="card-body">
 
@@ -58,17 +57,15 @@
 
                             <p class="card-text text-truncate"> ${p.content} </p>
 
-                            <a class="btn btn-primary ${username != p.author ? 'disabled' : ''}"
+                            <a class="btn btn-primary btn-sm ${username != p.author ? 'disabled' : ''}"
                                role="button"
                                 ${username != p.author ? '' : 'href="/edit-post?id=' += p.id += '"'}
                                 ${username != p.author ? 'aria-disabled="true"' : ''}>Edit</a>
 
-                            <a class="btn btn-danger ${username != p.author ? 'disabled' : ''}"
+                            <a class="btn btn-danger btn-sm ${username != p.author ? 'disabled' : ''}"
                                role="button"
                                 ${username != p.author ? '' : 'href="/edit-post?id='.concat(p.id).concat('"')}
                                 ${username != p.author ? 'aria-disabled="true"' : ''}>Delete</a>
-
-
 
                         </div>
                     </div>
