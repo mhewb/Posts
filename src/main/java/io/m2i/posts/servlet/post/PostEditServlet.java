@@ -1,8 +1,7 @@
-package io.m2i.posts.servlet;
+package io.m2i.posts.servlet.post;
 
-import io.m2i.posts.dao.PostDAO;
-import io.m2i.posts.dao.PostJdbcDAO;
 import io.m2i.posts.model.Post;
+import io.m2i.posts.service.PostService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,11 +11,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = EditPostServlet.URL)
-public class EditPostServlet extends HttpServlet {
+@WebServlet(urlPatterns = PostEditServlet.URL)
+public class PostEditServlet extends HttpServlet {
 
     public static final String URL = "/edit-post";
-    public static final String JSP = "/WEB-INF/create-post.jsp";
+    public static final String JSP = "/WEB-INF/post/post-form.jsp";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,18 +23,17 @@ public class EditPostServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String author = (String) session.getAttribute("username");
 
-
         int id = Integer.parseInt(req.getParameter("id"));
-        PostDAO postDAO = new PostJdbcDAO();
-        Post post = postDAO.getById(id);
 
-        System.out.println(post);
+        PostService postService = new PostService();
+        Post post = postService.getPostById(id);
+
         req.setAttribute("post", post);
         req.setAttribute("author", author);
         req.setAttribute("update", "update");
 
         req
-                .getRequestDispatcher(EditPostServlet.JSP)
+                .getRequestDispatcher(PostEditServlet.JSP)
                 .forward(req, resp);
 
 
@@ -46,18 +44,16 @@ public class EditPostServlet extends HttpServlet {
 
         int id = Integer.parseInt(req.getParameter("id"));
 
-        System.out.println(id);
-
-        PostDAO postDAO = new PostJdbcDAO();
-        Post post = postDAO.getById(id);
+        PostService postService = new PostService();
+        Post post = postService.getPostById(id);
 
         post.setTitle(req.getParameter("postTitle"));
         post.setContent(req.getParameter("postContent"));
         post.setImgUrl(req.getParameter("imgUrl"));
 
-        postDAO.update(post);
+        postService.updatePost(post);
 
-        resp.sendRedirect(EditPostServlet.URL+ "/?id=" + id);
+        resp.sendRedirect(PostEditServlet.URL+ "/?id=" + id);
 
 
     }

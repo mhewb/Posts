@@ -1,6 +1,9 @@
 package io.m2i.posts.service;
+import io.m2i.posts.dao.CategoryDAO;
+import io.m2i.posts.dao.CategoryJdbcDAO;
 import io.m2i.posts.dao.PostDAO;
 import io.m2i.posts.dao.PostJdbcDAO;
+import io.m2i.posts.model.Category;
 import io.m2i.posts.model.Post;
 
 import java.time.LocalDateTime;
@@ -19,16 +22,24 @@ public class PostService {
         return postDAO.getById(id);
     }
 
-    public void createPost(String title, String author, String content, String imgUrl) {
+    public void createPost(String title, String author, String content, Category category, String imgUrl) {
 
-        Post p = new Post(title, author, content);
+        Post p = new Post(title, author, content, category);
         p.setImgUrl(imgUrl);
         postDAO.create(p);
-
 
     }
 
     public void createPost(Post post) {
         postDAO.create(post);
     }
+
+    public void updatePost(Post post) {
+        postDAO.update(post);
+    }
+
+    public void deletePost(Post post) {
+        postDAO.delete(post);
+    }
+
 }

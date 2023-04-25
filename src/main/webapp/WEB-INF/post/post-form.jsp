@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="../menu.jsp"></jsp:include>
 
 <div class="container-md p-3">
 
@@ -25,30 +25,35 @@
         <label for="postTitle" class="form-label">Post Author</label>
         <input class="form-control" type="text"
                id="postAuthor"
-<%--               TODO: change to post.author in create-post servlet--%>
                value="${author}" aria-label="${author}"
                disabled readonly>
 
         <label for="postTitle" class="form-label">Post title</label>
         <input type="text" class="form-control" id="postTitle" name="postTitle"
-               placeholder="${empty post.title ? '' : post.title }">
+               value="${empty post.title ? '' : post.title }">
 
         <label for="postContent" class="form-label">Post content</label>
-        <textarea class="form-control" id="postContent" name="postContent" rows="3"
-                  placeholder="${empty post.content ? '' : post.content }"></textarea>
+        <textarea class="form-control" id="postContent" name="postContent" rows="3">
+${empty post.content ? '' : post.content }
+        </textarea>
 
         <label for="imgUrl" class="form-label">img URL</label>
         <input type="text" class="form-control" id="imgUrl" name="imgUrl"
-               placeholder="${empty post.imgUrl ? '' : post.imgUrl }">
+               value="${empty post.imgUrl ? '' : post.imgUrl }">
+
 
         <c:if test="${empty update}">
-
-            <button class="btn btn-primary" type="submit">Create Post</button>
-
+            <button class="btn btn-primary my-3" type="submit">Create Post</button>
         </c:if>
 
         <c:if test="${!empty update}">
-            <button class="btn btn-primary" type="submit" name="id" value=${post.id} formaction="/edit-post">Edit</button>
+            <button class="btn btn-primary my-3" type="submit" name="id"
+                    value=${post.id} formaction="/edit-post?id=${post.id}">Edit</button>
+
+            <a class="btn btn-danger" role="button"
+               href="/delete-post?id=${post.id}">
+               Delete
+            </a>
         </c:if>
 
 

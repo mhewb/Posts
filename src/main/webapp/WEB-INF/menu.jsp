@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/create-post">Create Post</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/category-list">Categories List</a>
+                </li>
             </ul>
 
             <span class="navbar-text">
