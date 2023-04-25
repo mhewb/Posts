@@ -76,7 +76,6 @@ public class UserJdbcDAO implements UserDAO {
         // TODO: delete User
     }
 
-
     @Override
     public User findByUsername(String username) {
 
