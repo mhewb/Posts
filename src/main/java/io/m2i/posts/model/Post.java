@@ -1,5 +1,7 @@
 package io.m2i.posts.model;
 
+import io.m2i.posts.api.dto.PostDTO;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,11 +18,13 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String author, String content, Category category) {
+    public Post(String title, String author, String content, String imgUrl, Category category) {
         this.title = title;
         this.author = author;
         this.content = content;
+        this.imgUrl = imgUrl;
         this.category = category;
+
     }
 
     public Post(int id, String title, String author, String content, String imgUrl, Category category) {
@@ -30,6 +34,21 @@ public class Post {
         this.content = content;
         this.imgUrl = imgUrl;
         this.category = category;
+    }
+
+    public PostDTO toDTO() {
+
+        PostDTO postDTO = new PostDTO();
+
+        postDTO.setId(this.id);
+        postDTO.setTitle(this.title);
+        postDTO.setAuthor(this.author);
+        postDTO.setContent(this.content);
+        postDTO.setImgUrl(this.imgUrl);
+        postDTO.setCategory(this.category);
+
+        return postDTO;
+
     }
 
     public int getId() {

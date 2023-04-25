@@ -15,15 +15,13 @@ public class PostDeleteServlet extends HttpServlet {
 
     public static final String URL = "/delete-post";
     public static final String JSP = "/WEB-INF/post/post-list.jsp";
+    PostService postService = new PostService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = Integer.parseInt(req.getParameter("id"));
-
-        PostService postService = new PostService();
-        Post post = postService.getPostById(id);
-        postService.deletePost(post);
+        postService.deletePostById(id);
 
         req.getRequestDispatcher(PostListServlet.URL).forward(req, resp);
 

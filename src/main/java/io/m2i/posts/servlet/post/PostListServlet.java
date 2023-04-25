@@ -18,19 +18,16 @@ public class PostListServlet extends HttpServlet {
 
     private static final String JSP = "/WEB-INF/post/post-list.jsp";
     public static final String URL = "/";
+    PostService postService = new PostService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-
         if (session.getAttribute("username") == null) {
-
             req.setAttribute("isLog", false);
-
         } else {
 
-            PostService postService = new PostService();
             List<Post> postList = postService.fetchAllPosts();
             req.setAttribute("posts", postList);
 

@@ -73,15 +73,16 @@ public class CategoryJdbcDAO implements CategoryDAO {
             e.printStackTrace();
             return null;
         }
+
         return categoryFound;
 
     }
 
-    public void update(Category category) {
+    public boolean update(Category category) {
 
         Connection connection = ConnectionManager.getInstance();
         String query = new StringBuilder()
-                .append("UPDATE Categories SET name = ?, WHERE id=?").toString();
+                .append("UPDATE Categories SET name = ? WHERE id=?").toString();
 
         try {
             PreparedStatement myPreparedStatement = connection.prepareStatement(query);
@@ -91,8 +92,11 @@ public class CategoryJdbcDAO implements CategoryDAO {
 
             int row = myPreparedStatement.executeUpdate();
 
+            return true;
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
 
 
@@ -116,4 +120,27 @@ public class CategoryJdbcDAO implements CategoryDAO {
         }
 
     }
+
+    @Override
+    public Category getByName(String name) {
+
+        Connection connection = ConnectionManager.getInstance();
+        String query = "SELECT id, name FROM Categories WHERE name=?;";
+        Category categoryFound = null;
+
+        try {
+            PreparedStatement myPreparedStatement = connection.prepareStatement(query);
+            myPreparedStatement.setString(1, name);
+            ResultSet result = myPreparedStatement.executeQuery();
+            if (result.next()) {
+                categoryFound = mapToCategory(result);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return categoryFound;
+    }
+
 }

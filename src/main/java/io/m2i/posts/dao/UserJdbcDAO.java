@@ -67,8 +67,8 @@ public class UserJdbcDAO implements UserDAO {
     }
 
     @Override
-    public void update(User entity) {
-        // TODO: update User
+    public boolean update(User entity) {
+        return false;
     }
 
     @Override

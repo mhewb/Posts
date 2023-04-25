@@ -24,13 +24,14 @@ public class PostJdbcDAO implements PostDAO {
 
         return new Post(id, title, author, content, imgUrl, category);
     }
+
     @Override
     public void create(Post post) {
 
         Connection connection = ConnectionManager.getInstance();
         String query =
                 "INSERT INTO Posts(title, author, content, imgUrl, id_Categories) " +
-                " VALUES(?,?,?,?,?)";
+                        " VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement myPreparedStatement = connection.prepareStatement(query);
@@ -44,6 +45,7 @@ public class PostJdbcDAO implements PostDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException("Could not create Post in BDD.");
         }
 
     }
@@ -93,7 +95,7 @@ public class PostJdbcDAO implements PostDAO {
 
     }
 
-    public void update(Post post) {
+    public boolean update(Post post) {
 
         Connection connection = ConnectionManager.getInstance();
         String query = new StringBuilder()
@@ -116,8 +118,11 @@ public class PostJdbcDAO implements PostDAO {
             int row = myPreparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
+
+        return true;
 
     }
 
@@ -137,5 +142,6 @@ public class PostJdbcDAO implements PostDAO {
             e.printStackTrace();
             throw new RuntimeException("Unable to delete Post");
         }
+    }
 
 }

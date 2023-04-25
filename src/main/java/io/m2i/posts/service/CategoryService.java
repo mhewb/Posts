@@ -14,15 +14,20 @@ public class CategoryService {
 
     public Category getCategoryById(Integer id) { return categoryDAO.getById(id); }
 
-    public void createCategory(String name) {
+    public Category getCategoryByName(String name) {
+        return categoryDAO.getByName(name);
+    };
+
+    public Category createCategory(String name) {
         Category category = new Category(name);
         categoryDAO.create(category);
+        return category;
     }
 
-    public void updateCategoryById(int id, String name) {
+    public boolean updateCategoryById(int id, String name) {
         Category category = new Category(id, name);
-        categoryDAO.update(category)
-        ;}
+        return categoryDAO.update(category);
+    }
 
     public void deleteCategoryById(int id) {
         Category category = getCategoryById(id);

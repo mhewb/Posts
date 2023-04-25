@@ -15,7 +15,7 @@ import java.io.IOException;
 public class CategoryEditServlet extends HttpServlet {
 
     public static final String URL = "/edit-category";
-    private static final String JSP = "WEB-INF/category/category-from.jsp";
+    private static final String JSP = "WEB-INF/category/category-form.jsp";
 
     CategoryService categoryService = new CategoryService();
 

@@ -8,7 +8,7 @@ public interface GenericDAO<T, ID> {
     List<T> findAll();
 
     T getById(ID id);
-    void update(T entity);
+    boolean update(T entity);
 
     void delete(T entity);
 

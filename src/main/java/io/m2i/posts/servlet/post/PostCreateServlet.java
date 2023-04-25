@@ -17,6 +17,8 @@ public class PostCreateServlet extends HttpServlet {
 
     public static final String URL = "/create-post";
     public static final String JSP = "/WEB-INF/post/post-form.jsp";
+    PostService postService = new PostService();
+    CategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,8 +27,6 @@ public class PostCreateServlet extends HttpServlet {
         String author = (String) session.getAttribute("username");
 
         req.setAttribute("author", author);
-
-        CategoryService categoryService = new CategoryService();
 
         req.setAttribute("categories", categoryService.fetchAllCategories());
 
@@ -54,13 +54,7 @@ public class PostCreateServlet extends HttpServlet {
 
 
         try {
-
-            // TODO: refactor here and PostService
-            CategoryService categoryService = new CategoryService();
-            Category category = categoryService.getCategoryById(Integer.valueOf(req.getParameter("category")));
-
-            PostService postService = new PostService();
-            postService.createPost(title, author, content, category, imgUrl);
+            postService.createPost(title, author, content, imgUrl, req.getParameter("category"));
         } catch (Exception e) {
             e.printStackTrace();
             req.setAttribute("createPostError", "Error while creating post");

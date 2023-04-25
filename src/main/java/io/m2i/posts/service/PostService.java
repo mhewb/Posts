@@ -1,4 +1,5 @@
 package io.m2i.posts.service;
+import io.m2i.posts.api.dto.PostDTO;
 import io.m2i.posts.dao.CategoryDAO;
 import io.m2i.posts.dao.CategoryJdbcDAO;
 import io.m2i.posts.dao.PostDAO;
@@ -13,6 +14,7 @@ import java.util.List;
 public class PostService {
 
     private final PostDAO postDAO = new PostJdbcDAO();
+    CategoryService categoryService = new CategoryService();
 
     public List<Post> fetchAllPosts() {
         return postDAO.findAll();
@@ -22,15 +24,35 @@ public class PostService {
         return postDAO.getById(id);
     }
     
-    public void createPost(String title, String author, String content, Category category, String imgUrl) {
+    public Post createPost(String title, String author, String content, String imgUrl, String categoryName) {
 
-        Post p = new Post(title, author, content, category);
-        p.setImgUrl(imgUrl);
-        postDAO.create(p);
+        Category category = categoryService.getCategoryByName(categoryName);
+        Post post = new Post(title, author, content, imgUrl, category);
+        postDAO.create(post);
+
+        return post;
     }
 
-    public void updatePost(Post post) {
-        postDAO.update(post);
+    public boolean updatePost(Post post) {
+        return postDAO.update(post);
+    }
+
+    public boolean updatePost(PostDTO dto) {
+
+        Category category = categoryService.getCategoryByName(dto.getCategory().getName());
+        dto.setCategory(category);
+
+        Post post = new Post(
+                dto.getId(),
+                dto.getTitle(),
+                dto.getAuthor(),
+                dto.getContent(),
+                dto.getImgUrl(),
+                dto.getCategory()
+
+        );
+
+        return postDAO.update(post);
     }
 
     public void deletePostById(int id) {

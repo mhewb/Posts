@@ -14,7 +14,7 @@ CREATE TABLE Users (
 
 CREATE TABLE Categories (
                             id INT auto_increment,
-                            name VARCHAR(100),
+                            name VARCHAR(100) UNIQUE,
                             PRIMARY KEY (id)
 );
 

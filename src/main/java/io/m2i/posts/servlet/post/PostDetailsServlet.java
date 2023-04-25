@@ -16,6 +16,7 @@ public class PostDetailsServlet extends HttpServlet {
 
     protected static final String URL = "/post-details";
     private static final String JSP = "/WEB-INF/post/post-details.jsp";
+    PostService postService = new PostService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,8 +28,6 @@ public class PostDetailsServlet extends HttpServlet {
         }
 
         int id = Integer.parseInt(req.getParameter("id"));
-
-        PostService postService = new PostService();
         Post post = postService.getPostById(id);
 
         req.setAttribute("post", post);

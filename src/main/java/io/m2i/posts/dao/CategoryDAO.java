@@ -4,8 +4,8 @@ import io.m2i.posts.model.Category;
 
 public interface CategoryDAO extends GenericDAO<Category, Integer> {
 
+    Category getByName(String name);
 
-
-    }
+}
 
 

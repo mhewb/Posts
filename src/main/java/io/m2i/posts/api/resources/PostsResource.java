@@ -1,16 +1,16 @@
 package io.m2i.posts.api.resources;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.m2i.posts.api.dto.PostDTO;
 import io.m2i.posts.model.Post;
 import io.m2i.posts.service.PostService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Path("/posts")
+@Path("/post")
 public class PostsResource {
 
     PostService postService = new PostService();
@@ -18,9 +18,16 @@ public class PostsResource {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getAllPosts() {
+
+        List<PostDTO> postDTOList = new ArrayList<>();
+
+        for (Post post: postService.fetchAllPosts()) {
+            postDTOList.add(post.toDTO());
+        }
+
         return Response
                 .status(Response.Status.CREATED)
-                .entity(postService.fetchAllPosts())
+                .entity(postDTOList)
                 .build();
     }
 
@@ -28,23 +35,30 @@ public class PostsResource {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Response getPostById(@PathParam("id") int id) {
+
+        PostDTO postDTO = postService.getPostById(id).toDTO();
+
         return Response
                 .status(Response.Status.CREATED)
-                .entity(postService.getPostById(id))
+                .entity(postDTO)
                 .build();
     }
 
     @POST
     @Consumes(value = MediaType.APPLICATION_JSON)
-    @Produces(value = MediaType.APPLICATION_JSON)
-    public Response createPost(Post post) {  // JSON ===> JAVA
+    public Response createPost(PostDTO dto) {  // JSON ===> JAVA
 
-        postService.createPost(post);
+        Post post = postService.createPost(
+                dto.getTitle(),
+                dto.getAuthor(),
+                dto.getContent(),
+                dto.getImgUrl(),
+                dto.getCategory().getName()
+        );
 
         return Response
                 .status(Response.Status.CREATED)
-                .entity(post)
-                .build();  // JAVA ===> JSON
+                .build();
     }
 
     @Path("{id}")
@@ -59,10 +73,12 @@ public class PostsResource {
                 .build();  // JAVA ===> JSON
     }
 
+
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(@PathParam("id") int id, Post post) {
+    public Response update(@PathParam("id") int id, PostDTO postDTO) {
+
         Post existingPost = postService.getPostById(id);
 
         if (existingPost == null) {
@@ -71,13 +87,15 @@ public class PostsResource {
                     .build();
         }
 
-        post.setId(existingPost.getId());
-        postService.updatePost(post);
+        postDTO.setId(existingPost.getId());
+        boolean success = postService.updatePost(postDTO);
+
+        System.out.println(success);
+
         return Response
                 .status(Response.Status.OK)
                 .build();
 
-//        return Response.ok(post).build();
     }
 }
 

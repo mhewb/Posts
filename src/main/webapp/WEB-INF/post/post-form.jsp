@@ -41,6 +41,21 @@ ${empty post.content ? '' : post.content }
         <input type="text" class="form-control" id="imgUrl" name="imgUrl"
                value="${empty post.imgUrl ? '' : post.imgUrl }">
 
+        <select class="form-select" name="category">
+
+            <c:if test="${!empty update}">
+                <option value="${post.category.getName()}" selected>${post.category.getName()}</option>
+            </c:if>
+
+            <c:if test="${empty update}">
+                <option selected>Please select a Category</option>
+            </c:if>
+
+            <c:forEach var="cat" items="${categories}">
+                <option value="${cat.id}">${cat.name}</option>
+            </c:forEach>
+        </select>
+
 
         <c:if test="${empty update}">
             <button class="btn btn-primary my-3" type="submit">Create Post</button>

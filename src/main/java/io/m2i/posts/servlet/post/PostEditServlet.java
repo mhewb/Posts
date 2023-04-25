@@ -17,6 +17,8 @@ public class PostEditServlet extends HttpServlet {
     public static final String URL = "/edit-post";
     public static final String JSP = "/WEB-INF/post/post-form.jsp";
 
+    PostService postService = new PostService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -24,8 +26,6 @@ public class PostEditServlet extends HttpServlet {
         String author = (String) session.getAttribute("username");
 
         int id = Integer.parseInt(req.getParameter("id"));
-
-        PostService postService = new PostService();
         Post post = postService.getPostById(id);
 
         req.setAttribute("post", post);
@@ -43,8 +43,6 @@ public class PostEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int id = Integer.parseInt(req.getParameter("id"));
-
-        PostService postService = new PostService();
         Post post = postService.getPostById(id);
 
         post.setTitle(req.getParameter("postTitle"));
