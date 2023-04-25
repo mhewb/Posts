@@ -21,7 +21,7 @@
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-<jsp:include page="menu.jsp"></jsp:include>
+<jsp:include page="../menu.jsp"></jsp:include>
 
 <div class="container-md my-5 p-3">
 
@@ -31,41 +31,48 @@
 
     <c:if test="${empty isLog}">
 
-    <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
 
-            <c:forEach var="p" items="${posts}">
+            <c:forEach var="post" items="${posts}">
 
                 <div class="col my-3">
                     <div class="card h-100">
 
 
-                        <c:if test="${empty p.imgUrl}">
+                        <c:if test="${empty post.imgUrl}">
                             <img src="..." class="card-img-top" alt="...">
                         </c:if>
 
-                        <c:if test="${!empty p.imgUrl}">
-                            <img src="${pageContext.request.contextPath}/${p.imgUrl}" class="card-img-top" alt="...">
+                        <c:if test="${!empty post.imgUrl}">
+                            <img src="${pageContext.request.contextPath}/${post.imgUrl}" class="card-img-top" alt="...">
                         </c:if>
 
                         <div class="card-body">
 
-                            <h5 class="card-title"> ${p.title} </h5>
+                            <h5 class="card-title"> ${post.title} </h5>
 
                             <h6 class="card-subtitle mb-2 text-muted fw-lighter">
-                                from: ${p.author}
+                                from: ${post.author}
+                            </h6>
+                            <h6 class="card-subtitle mb-2 text-muted fw-lighter">
+                                category: ${post.category.getName()}
                             </h6>
 
-                            <p class="card-text text-truncate"> ${p.content} </p>
 
-                            <a class="btn btn-primary btn-sm ${username != p.author ? 'disabled' : ''}"
-                               role="button"
-                                ${username != p.author ? '' : 'href="/edit-post?id=' += p.id += '"'}
-                                ${username != p.author ? 'aria-disabled="true"' : ''}>Edit</a>
+                            <p class="card-text text-truncate"> ${post.content} </p>
 
-                            <a class="btn btn-danger btn-sm ${username != p.author ? 'disabled' : ''}"
+                            <a class="btn btn-secondary btn-sm"
+                               role="button" href="/post-details?id=${post.id}">Details</a>
+
+                            <a class="btn btn-primary btn-sm ${username != post.author ? 'disabled' : ''}"
                                role="button"
-                                ${username != p.author ? '' : 'href="/edit-post?id='.concat(p.id).concat('"')}
-                                ${username != p.author ? 'aria-disabled="true"' : ''}>Delete</a>
+                                ${username != post.author ? '' : 'href="/edit-post?id=' += post.id += '"'}
+                                ${username != post.author ? 'aria-disabled="true"' : ''}>Edit</a>
+
+                            <a class="btn btn-danger btn-sm ${username != post.author ? 'disabled' : ''}"
+                               role="button"
+                                ${username != post.author ? '' : 'href="/delete-post?id='.concat(post.id).concat('"')}
+                                ${username != post.author ? 'aria-disabled="true"' : ''}>Delete</a>
 
                         </div>
                     </div>

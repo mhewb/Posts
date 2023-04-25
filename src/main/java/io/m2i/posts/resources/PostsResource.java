@@ -21,7 +21,7 @@ public class PostsResource {
         return Response
                 .status(Response.Status.CREATED)
                 .entity(postService.fetchAllPosts())
-                .build();  // JAVA ===> JSON
+                .build();
     }
 
     @Path("{id}")
@@ -31,7 +31,7 @@ public class PostsResource {
         return Response
                 .status(Response.Status.CREATED)
                 .entity(postService.getPostById(id))
-                .build();  // JAVA ===> JSON
+                .build();
     }
 
     @POST

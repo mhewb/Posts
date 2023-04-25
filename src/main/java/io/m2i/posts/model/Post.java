@@ -10,37 +10,26 @@ public class Post {
     private String title;
     private String author;
     private String content;
-//    private LocalDateTime createdAt;
     private String imgUrl;
+    private Category category;
 
     public Post() {
     }
 
-    public Post(String title, String author, String content) {
+    public Post(String title, String author, String content, Category category) {
         this.title = title;
         this.author = author;
         this.content = content;
-//        this.createdAt = createdAt;
+        this.category = category;
     }
 
-    public Post(int id, String title, String author, String content, String imgUrl) {
+    public Post(int id, String title, String author, String content, String imgUrl, Category category) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.content = content;
-//        this.createdAt = createdAt;
         this.imgUrl = imgUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "\n id=" + id +
-                "\n title='" + title + '\'' +
-                "\n author='" + author + '\'' +
-                "\n content='" + content + '\'' +
-                "\n imgUrl='" + imgUrl + '\'' +
-                '}';
+        this.category = category;
     }
 
     public int getId() {
@@ -81,5 +70,13 @@ public class Post {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

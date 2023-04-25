@@ -1,4 +1,4 @@
-package io.m2i.posts.servlet;
+package io.m2i.posts.servlet.log;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
